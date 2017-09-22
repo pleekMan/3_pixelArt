@@ -222,7 +222,16 @@ img {
   }
 }
 
-#switchLinea{
+#switchLinea {
+   background-color: black;
+   margin: 10px;
+   display: block;
+
+}
+#switchLinea label{
    color: white;
+   line-height: auto;
    margin-left: 10px;
+   height: auto;
+   /*width: 100%;*/
 }

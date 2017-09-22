@@ -106,7 +106,7 @@ $grillaDePixeles.click(function(event){
    $(event.target).css("background-color", colorSwatch);
 
    updateLinePixels(getPixelIndex(event.target));
-   if (lineaMode && linePixels[0] > 0 && linePixels[1] > 0) {
+   if (modoLinea && linePixels[0] > 0 && linePixels[1] > 0) {
       dibujarLinea(linePixels[0],linePixels[1]);
    }
 
@@ -178,8 +178,7 @@ $("#guardar").click(function(){
    guardarPixelArt();
 });
 
-// LINEAS
-$switchLineas = $("#switchLinea");
+// MODO LINEAS --------------
 
 function updateLinePixels(lastPixelClicked){
    linePixels[0] = linePixels[1];
@@ -187,18 +186,11 @@ function updateLinePixels(lastPixelClicked){
    console.log(linePixels);
 }
 
-$switchLineas.change(function() {
-  lineaMode = $(this).prop("checked");
+$("#linkToCheckBox").change(function() {
+  modoLinea = $(this).prop("checked");
   console.log(lineaMode);
 });
 
-$("#lineaMode").click(function(){
-   modoLinea = !lineaMode;
-   console.log("ModoLinea => " + modoLinea);
-
-   dibujarLinea(linePixel[0],linePixel[1]);
-
-});
 
 function dibujarLinea(pixel_1_index, pixel_2_index){
    var width = 53;  // pixels en una row
@@ -224,7 +216,8 @@ function dibujarLinea(pixel_1_index, pixel_2_index){
 
       var colorSwatch = $("#indicador-de-color").css("background-color");
 
-      $grillaDePixeles.children("div").eq(finalPixelIndexOnLine).css("background-color", colorSwatch);
+      var showDelay =  mapToRange(i,0,largerResolution, 0,1000);
+      $grillaDePixeles.children("div").eq(finalPixelIndexOnLine).animate({"background-color":colorSwatch},showDelay);
    }
 
    console.log("Linea: End");
